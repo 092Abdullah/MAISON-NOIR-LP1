@@ -1,26 +1,208 @@
-import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
+import { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { SectionHeading } from '@/components/SectionHeading';
-import { services } from '@/lib/data';
-import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const services = [
+  {
+    number: '01',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="22" height="22" rx="2" />
+        <path d="M3 10h22M10 10v15" />
+      </svg>
+    ),
+    title: 'Full-Service Design',
+    description: 'End-to-end design from initial concept through final installation — space planning, material selection, bespoke furniture, and complete project coordination.',
+    tag: 'Most popular',
+  },
+  {
+    number: '02',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="14" cy="14" r="10" />
+        <path d="M14 8v6l4 2" />
+      </svg>
+    ),
+    title: 'Design Consultation',
+    description: 'A focused one-on-one session to clarify your direction, resolve a design problem, or provide expert feedback on an existing project or renovation plan.',
+    tag: null,
+  },
+  {
+    number: '03',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 22 L14 6 L24 22" />
+        <path d="M8 16h12" />
+      </svg>
+    ),
+    title: 'Renovation Oversight',
+    description: 'We embed with your contractor team to ensure design intent is preserved throughout the build — material approvals, site visits, and punch-list management.',
+    tag: null,
+  },
+  {
+    number: '04',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 21 L14 5 L23 21" />
+        <path d="M5 21 H23" />
+        <path d="M9 21 V14 H19 V21" />
+      </svg>
+    ),
+    title: 'Residential Interiors',
+    description: 'Homes that are personal, precise, and built to last — from studio apartments to sprawling estates, each space designed to reflect how you actually live.',
+    tag: null,
+  },
+  {
+    number: '05',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="8" width="20" height="16" rx="2" />
+        <path d="M4 13h20M9 8V5a5 5 0 0 1 10 0v3" />
+      </svg>
+    ),
+    title: 'Hospitality Design',
+    description: 'Boutique hotels, private clubs, and restaurants where atmosphere is everything — crafting environments that guests remember long after they leave.',
+    tag: null,
+  },
+  {
+    number: '06',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 20V10l10-6 10 6v10" />
+        <rect x="10" y="14" width="8" height="6" />
+      </svg>
+    ),
+    title: 'Art & Material Sourcing',
+    description: 'We navigate global supplier networks — Parisian ateliers, Italian stone yards, Scandinavian textile mills — to find pieces with character and provenance.',
+    tag: null,
+  },
+];
+
+interface CardProps {
+  service: typeof services[0];
+  index: number;
+  active: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
+}
+
+function ServiceCard({ service, index, active, onEnter, onLeave }: CardProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: (index % 2) * 0.1 + Math.floor(index / 2) * 0.08 }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      className={cn(
+        'group relative flex flex-col gap-6 p-8 transition-colors duration-300 lg:p-10',
+        active ? 'bg-[#111]' : 'bg-[#0a0a0a]',
+      )}
+    >
+      {/* top row: icon left, number right */}
+      <div className="flex items-start justify-between">
+        <div className={cn('transition-colors duration-300', active ? 'text-[#e2e2e2]' : 'text-[#2a2a2a]')}>
+          {service.icon}
+        </div>
+        <span className="font-mono text-xs text-[#2a2a2a] transition-colors duration-300 group-hover:text-[#444]">
+          {service.number}
+        </span>
+      </div>
+
+      {/* title + optional tag */}
+      <div className="flex flex-wrap items-baseline gap-3">
+        <h3 className={cn('font-display text-2xl tracking-tight transition-colors duration-300 lg:text-3xl', active ? 'text-[#e2e2e2]' : 'text-[#6b6b6b]')}>
+          {service.title}
+        </h3>
+        {service.tag && (
+          <span className="rounded-full border border-[#2a2a2a] px-2.5 py-0.5 text-[10px] font-medium tracking-widest text-[#555] uppercase">
+            {service.tag}
+          </span>
+        )}
+      </div>
+
+      {/* description */}
+      <p className="flex-1 text-sm leading-[1.75] text-[#444]">{service.description}</p>
+
+      {/* learn more link */}
+      <a
+        href="#contact"
+        className={cn(
+          'group/link inline-flex items-center gap-2 self-start text-sm font-medium transition-colors duration-300',
+          active ? 'text-[#e2e2e2]' : 'text-[#2a2a2a]',
+        )}
+      >
+        Learn more
+        <span className={cn('flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300', active ? 'border-[#555] bg-white/5' : 'border-[#1e1e1e]')}>
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+        </span>
+      </a>
+    </motion.div>
+  );
+}
+
 export function Services() {
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+
   return (
     <section id="services" className="border-b border-[#1e1e1e] bg-[#0a0a0a] py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-14">
-        <Reveal className="mb-14">
-          <div className="mb-4 flex items-center gap-3"><span className="h-px w-8 bg-white/20" /><span className="text-label text-[#555]">What we offer</span></div>
-          <SectionHeading text="Our Services" className="text-4xl sm:text-5xl lg:text-6xl text-[#e2e2e2]" />
-        </Reveal>
-        <Stagger className="grid gap-px bg-[#1e1e1e]" staggerDelay={0.12}>
-          {services.map((s) => (
-            <StaggerItem key={s.id}>
-              <div className="group flex cursor-default items-start gap-6 bg-[#0a0a0a] p-8 transition-colors hover:bg-[#111] sm:p-10">
-                <span className="mt-0.5 shrink-0 font-mono text-base text-[#a8a8a8]">{s.number}</span>
-                <div className="min-w-0 flex-1"><h3 className="mb-3 font-display text-2xl text-[#e2e2e2] sm:text-3xl">{s.title}</h3><p className="max-w-xl leading-relaxed text-[#444]">{s.description}</p></div>
-                <ArrowRight className="mt-1 hidden h-4 w-4 shrink-0 text-[#a8a8a8] opacity-0 transition-opacity group-hover:opacity-100 sm:block" />
+
+        {/* Header row */}
+        <div className="mb-14 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="mb-4 flex items-center gap-3">
+              <span className="h-px w-8 bg-white/20" />
+              <span className="text-label text-[#555]">What we offer</span>
+            </div>
+            <SectionHeading text="Our Services" className="text-4xl sm:text-5xl lg:text-6xl text-[#e2e2e2]" />
+          </div>
+          <p className="max-w-xs text-sm leading-relaxed text-[#444] sm:text-right">
+            Each engagement is shaped around your project — no standard packages, no shortcuts.
+          </p>
+        </div>
+
+        {/* 2-column grid with hairline borders */}
+        <div className="grid grid-cols-1 border border-[#1e1e1e] sm:grid-cols-2">
+          {services.map((service, i) => {
+            const isLastRow = i >= services.length - (services.length % 2 === 0 ? 2 : 1);
+            const isRightCol = i % 2 === 1;
+            return (
+              <div
+                key={service.number}
+                className={cn(
+                  'relative',
+                  // right border on left-column cells (vertical divider)
+                  !isRightCol && 'sm:border-r sm:border-[#1e1e1e]',
+                  // bottom border on all but last row
+                  !isLastRow && 'border-b border-[#1e1e1e]',
+                )}
+              >
+                <ServiceCard
+                  service={service}
+                  index={i}
+                  active={activeIdx === i}
+                  onEnter={() => setActiveIdx(i)}
+                  onLeave={() => setActiveIdx(null)}
+                />
               </div>
-            </StaggerItem>
-          ))}
-        </Stagger>
+            );
+          })}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-10 flex items-center justify-between border-t border-[#1e1e1e] pt-8">
+          <p className="text-sm text-[#333]">Not sure which service fits? We'll help you figure it out.</p>
+          <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-all hover:bg-white/90">
+            Talk to us <span className="transition-transform group-hover:translate-x-0.5">→</span>
+          </a>
+        </div>
       </div>
     </section>
   );

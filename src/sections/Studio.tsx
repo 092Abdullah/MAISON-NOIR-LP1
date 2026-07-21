@@ -12,11 +12,7 @@ export function Studio() {
             <p className="leading-relaxed text-[#444]">We work with a small, curated client list at any given time. This lets us bring the same intensity we'd give to a private home to every project, whether it's a penthouse in Manhattan or a hillside retreat on the Amalfi coast.</p>
             <a href="#contact" className="mt-10 inline-flex items-center gap-2 rounded-full border border-[#2a2a2a] px-6 py-3 text-sm text-[#6b6b6b] transition-all hover:border-[#a8a8a8] hover:text-[#e2e2e2]">Work with us →</a>
           </Reveal>
-          <Reveal delay={0.15}>
-            <div className="overflow-hidden rounded-2xl">
-              <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Studio team" className="h-[400px] w-full object-cover sm:h-[500px]" loading="lazy" />
-            </div>
-          </Reveal>
+          <Reveal delay={0.15}><div className="overflow-hidden rounded-2xl"><img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Studio team" className="h-[400px] w-full object-cover sm:h-[500px]" loading="lazy" /></div></Reveal>
         </div>
       </div>
     </section>

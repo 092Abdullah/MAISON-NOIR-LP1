@@ -24,12 +24,6 @@ export const navLinks = [
   { label: 'Contact', href: '#contact' },
 ];
 
-export const services = [
-  { id: '1', number: '01', title: 'Full-Service Design', description: 'From concept to completion — space planning, material sourcing, bespoke furniture, and installation management.' },
-  { id: '2', number: '02', title: 'Design Consultation', description: 'A focused session to clarify your direction, resolve a specific design problem, or review an ongoing project.' },
-  { id: '3', number: '03', title: 'Renovation Oversight', description: 'We manage the build process alongside your contractor, ensuring design intent is upheld at every stage.' },
-];
-
 export const processSteps = [
   { number: '01', title: 'Discovery', description: 'An in-depth conversation about how you live, your aesthetic sensibilities, and what you want to feel when you walk through the door.' },
   { number: '02', title: 'Concept', description: 'We develop a spatial concept, mood boards, and a preliminary material palette that captures the spirit of the project.' },
