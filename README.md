@@ -1,6 +1,6 @@
 # Maison Noir — Landing Page
 
-Interior design studio landing page built with React + Vite + TypeScript + Tailwind CSS.
+Interior design studio landing page. Built with React + Vite + TypeScript + Tailwind CSS.
 
 ## Stack
 
@@ -19,6 +19,10 @@ npm install
 npm run dev
 ```
 
-## Deploy
+## Deploy to Vercel
 
-Connects to Vercel directly from this repo. No extra configuration needed — Vite preset auto-detected.
+Import this repo in Vercel. Framework preset auto-detected as **Vite**. No additional configuration needed:
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- Install command: `npm install`

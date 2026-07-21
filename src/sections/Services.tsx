@@ -2,19 +2,14 @@ import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
 import { SectionHeading } from '@/components/SectionHeading';
 import { services } from '@/lib/data';
 import { ArrowRight } from 'lucide-react';
-
 export function Services() {
   return (
     <section id="services" className="border-b border-[#1e1e1e] bg-[#0a0a0a] py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-14">
         <Reveal className="mb-14">
-          <div className="mb-4 flex items-center gap-3">
-            <span className="h-px w-8 bg-white/20" />
-            <span className="text-label text-[#555]">What we offer</span>
-          </div>
+          <div className="mb-4 flex items-center gap-3"><span className="h-px w-8 bg-white/20" /><span className="text-label text-[#555]">What we offer</span></div>
           <SectionHeading text="Our Services" className="text-4xl sm:text-5xl lg:text-6xl text-[#e2e2e2]" />
         </Reveal>
-
         <Stagger className="grid gap-px bg-[#1e1e1e]" staggerDelay={0.12}>
           {services.map((s) => (
             <StaggerItem key={s.id}>
