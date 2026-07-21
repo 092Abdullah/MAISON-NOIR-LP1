@@ -1,5 +1,5 @@
 import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
-import GlassSurface from '@/components/GlassSurface';
+import { GlassSurface } from '@/components/GlassSurface';
 import { stats } from '@/lib/data';
 
 const press = ['Architectural Digest', 'Dezeen', 'Wallpaper*', 'Elle Decor', 'Dwell',

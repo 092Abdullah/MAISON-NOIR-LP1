@@ -60,14 +60,18 @@ export function SignatureWork() {
                   <span className={cn('min-w-0 flex-1 font-display text-xl tracking-tight transition-colors sm:text-3xl lg:text-4xl', activeIndex === i ? 'text-[#e2e2e2]' : 'text-[#e2e2e2]/50')}>{p.title}</span>
                   <span className="hidden w-36 shrink-0 text-sm text-[#444] sm:block">{p.category}</span>
                   <span className="hidden w-32 shrink-0 text-sm text-[#333] lg:block">{p.location}</span>
-                  <span className={cn('ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all', activeIndex === i ? 'border-[#a8a8a8] bg-[#a8a8a8] text-black' : 'border-[#2a2a2a] text-[#444] group-hover:border-[#444]')}><ArrowRight className="h-3.5 w-3.5" /></span>
+                  <span className={cn('ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all', activeIndex === i ? 'border-[#a8a8a8] bg-[#a8a8a8] text-black' : 'border-[#2a2a2a] text-[#444] group-hover:border-[#444]')}>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
                 </a>
               </li>
             ))}
             <li className="border-t border-[#1e1e1e]" />
           </ul>
           <div className="mt-8 flex justify-end">
-            <a href="#work" className="group flex items-center gap-2 text-label text-[#444] transition-colors hover:text-[#e2e2e2]">See all projects <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" /></a>
+            <a href="#work" className="group flex items-center gap-2 text-label text-[#444] transition-colors hover:text-[#e2e2e2]">
+              See all projects <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+            </a>
           </div>
         </div>
       </div>

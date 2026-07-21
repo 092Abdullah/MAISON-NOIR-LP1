@@ -32,7 +32,11 @@ export function Contact() {
                     <span className={cn('shrink-0 font-mono text-lg text-[#a8a8a8] transition-transform duration-300', open === i ? 'rotate-45' : '')}>+</span>
                   </button>
                   <AnimatePresence>
-                    {open === i && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }} className="overflow-hidden"><p className="pb-5 text-sm leading-relaxed text-[#444]">{faq.a}</p></motion.div>}
+                    {open === i && (
+                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }} className="overflow-hidden">
+                        <p className="pb-5 text-sm leading-relaxed text-[#444]">{faq.a}</p>
+                      </motion.div>
+                    )}
                   </AnimatePresence>
                 </li>
               ))}

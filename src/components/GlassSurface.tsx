@@ -1,37 +1,24 @@
-import React, { CSSProperties, ReactNode } from "react";
+import React from 'react';
+import { cn } from '@/lib/utils';
 
 interface GlassSurfaceProps {
-  children?: ReactNode;
-  className?: string;
-  borderRadius?: string | number;
+  children: React.ReactNode;
+  borderRadius?: number;
   backgroundOpacity?: number;
-  style?: CSSProperties;
+  className?: string;
 }
 
-export default function GlassSurface({
-  children,
-  className = "",
-  borderRadius = "12px",
-  backgroundOpacity = 0.06,
-  style,
-}: GlassSurfaceProps) {
-  const radius =
-    typeof borderRadius === "number" ? `${borderRadius}px` : borderRadius;
-
-  const glassStyle: CSSProperties = {
-    backgroundColor: `rgba(255, 255, 255, ${backgroundOpacity})`,
-    border: "1px solid #1e1e1e",
-    borderRadius: radius,
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-    ...style,
-  };
-
+export function GlassSurface({ children, borderRadius = 12, backgroundOpacity = 0.04, className }: GlassSurfaceProps) {
   return (
-    <div className={className} style={glassStyle}>
+    <div
+      className={cn('relative overflow-hidden', className)}
+      style={{
+        borderRadius,
+        background: `rgba(255,255,255,${backgroundOpacity})`,
+        border: '1px solid rgba(255,255,255,0.06)',
+      }}
+    >
       {children}
     </div>
   );
 }
-
-export { GlassSurface };

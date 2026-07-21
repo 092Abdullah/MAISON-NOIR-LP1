@@ -1,102 +1,52 @@
-import React, { useRef, ReactNode } from "react";
-import { motion, useInView, Variants } from "framer-motion";
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-// ─── Reveal ────────────────────────────────────────────────────────────────────
-interface RevealProps {
-  children: ReactNode;
-  delay?: number;
-  duration?: number;
-  className?: string;
-}
+interface RevealProps { children: React.ReactNode; delay?: number; className?: string; }
 
-export function Reveal({
-  children,
-  delay = 0,
-  duration = 0.7,
-  className = "",
-}: RevealProps) {
+export function Reveal({ children, delay = 0, className }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -60px 0px" });
-
+  const inView = useInView(ref, { once: true, margin: '-60px' });
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-      transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
+    <div ref={ref} className={className}>
+      <motion.div
+        initial={{ opacity: 0, y: 22 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay }}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }
 
-// ─── Stagger container ─────────────────────────────────────────────────────────
-interface StaggerProps {
-  children: ReactNode;
-  staggerDelay?: number;
-  className?: string;
-}
+interface StaggerProps { children: React.ReactNode; className?: string; staggerDelay?: number; }
 
-const staggerVariants: Variants = {
-  hidden: {},
-  visible: (staggerDelay: number) => ({
-    transition: { staggerChildren: staggerDelay },
-  }),
-};
-
-export function Stagger({
-  children,
-  staggerDelay = 0.1,
-  className = "",
-}: StaggerProps) {
+export function Stagger({ children, className, staggerDelay = 0.1 }: StaggerProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
-
+  const inView = useInView(ref, { once: true, margin: '-60px' });
   return (
     <motion.div
       ref={ref}
       className={className}
-      variants={staggerVariants}
       initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      custom={staggerDelay}
+      animate={inView ? 'visible' : 'hidden'}
+      variants={{ visible: { transition: { staggerChildren: staggerDelay } } }}
     >
       {children}
     </motion.div>
   );
 }
 
-// ─── StaggerItem ───────────────────────────────────────────────────────────────
-interface StaggerItemProps {
-  children: ReactNode;
-  duration?: number;
-  className?: string;
-}
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (duration: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
-export function StaggerItem({
-  children,
-  duration = 0.65,
-  className = "",
-}: StaggerItemProps) {
+export function StaggerItem({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.div
       className={className}
-      variants={itemVariants}
-      custom={duration}
+      variants={{
+        hidden: { opacity: 0, y: 18 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+      }}
     >
       {children}
     </motion.div>
   );
 }
-
-export default Reveal;

@@ -9,7 +9,10 @@ export function SectionHeading({ text, as: Tag = 'h2', className = '' }: Section
     if (!containerRef.current) return;
     const words = containerRef.current.querySelectorAll<HTMLSpanElement>('.sr-word');
     words.forEach((word, i) => {
-      ScrollReveal().reveal(word, { origin: 'bottom', distance: '24px', duration: 650, delay: i * 70, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', opacity: 0, reset: false });
+      ScrollReveal().reveal(word, {
+        origin: 'bottom', distance: '24px', duration: 650,
+        delay: i * 70, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', opacity: 0, reset: false,
+      });
     });
   }, [text]);
   return (
@@ -22,5 +25,3 @@ export function SectionHeading({ text, as: Tag = 'h2', className = '' }: Section
     </div>
   );
 }
-
-export default SectionHeading;
