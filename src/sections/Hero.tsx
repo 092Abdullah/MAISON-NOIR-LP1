@@ -11,9 +11,7 @@ export function Hero() {
       <div aria-hidden className="pointer-events-none absolute inset-0 z-10 opacity-[0.025]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")', backgroundRepeat: 'repeat', backgroundSize: '128px 128px' }} />
       <div className="relative z-20 mx-auto grid min-h-[100svh] max-w-[1440px] grid-cols-1 items-center gap-0 px-5 sm:px-8 lg:grid-cols-2 lg:gap-0 lg:px-14">
         <div className="flex flex-col justify-center pb-12 pt-28 lg:pb-20 lg:pt-0 lg:pr-16">
-          <motion.div {...fadeUp(0.1)} className="mb-8 flex items-center gap-3">
-            <span className="h-px w-10 bg-[#444]" /><span className="text-label text-[#555]">Interior Design Studio — Est. 2013</span>
-          </motion.div>
+          <motion.div {...fadeUp(0.1)} className="mb-8 flex items-center gap-3"><span className="h-px w-10 bg-[#444]" /><span className="text-label text-[#555]">Interior Design Studio — Est. 2013</span></motion.div>
           <div className="mb-8">
             <h1 className="font-display leading-[0.92] tracking-tight text-[#e2e2e2]" style={{ fontSize: 'clamp(3.2rem, 6.5vw, 6rem)' }}>
               <motion.span {...fadeUp(0.18)} className="block">Spaces</motion.span>

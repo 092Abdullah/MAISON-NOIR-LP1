@@ -1,11 +1,65 @@
-interface LogoProps { color?: string; height?: number; className?: string; }
-export function Logo({ color = '#e2e2e2', height = 32, className }: LogoProps) {
+import React from "react";
+
+interface LogoProps {
+  color?: string;
+  height?: number;
+  className?: string;
+}
+
+export default function Logo({
+  color = "#e2e2e2",
+  height = 40,
+  className = "",
+}: LogoProps) {
+  const aspectRatio = 120 / 40;
+  const width = height * aspectRatio;
+
   return (
-    <svg viewBox="0 0 160 40" height={height} fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Maison Noir" className={className} style={{ display: 'block' }}>
-      <polygon points="10,4 16,20 10,36 4,20" fill="none" stroke={color} strokeWidth="1" strokeLinejoin="round" opacity="0.9" />
-      <text x="24" y="16" fontFamily="'DM Mono', monospace" fontSize="9" fontWeight="400" letterSpacing="4" fill={color} dominantBaseline="middle" opacity="0.95">MAISON</text>
-      <line x1="24" y1="21" x2="152" y2="21" stroke={color} strokeWidth="0.4" opacity="0.3" />
-      <text x="24" y="30" fontFamily="'DM Mono', monospace" fontSize="9" fontWeight="400" letterSpacing="4" fill={color} dominantBaseline="middle" opacity="0.65">NOIR</text>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 120 40"
+      width={width}
+      height={height}
+      className={className}
+      aria-label="Maison Noir"
+      role="img"
+      fill="none"
+    >
+      {/* Diamond glyph */}
+      <polygon
+        points="8,4 14,10 8,16 2,10"
+        fill={color}
+      />
+
+      {/* MAISON */}
+      <text
+        x="22"
+        y="13"
+        fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        fontSize="10"
+        fontWeight="700"
+        letterSpacing="3"
+        fill={color}
+        dominantBaseline="auto"
+      >
+        MAISON
+      </text>
+
+      {/* NOIR */}
+      <text
+        x="22"
+        y="26"
+        fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        fontSize="10"
+        fontWeight="300"
+        letterSpacing="6"
+        fill={color}
+        dominantBaseline="auto"
+      >
+        NOIR
+      </text>
     </svg>
   );
 }
+
+export { Logo };

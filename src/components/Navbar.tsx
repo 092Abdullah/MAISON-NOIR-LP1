@@ -2,9 +2,11 @@ import PillNav from '@/components/PillNav';
 import MobileMenu from '@/components/MobileMenu';
 import { Logo } from '@/components/Logo';
 import { navLinks } from '@/lib/data';
+
 const pillItems = navLinks.map((l) => ({ label: l.label, href: l.href }));
 const menuItems = navLinks.map((l) => ({ label: l.label, link: l.href }));
 const socialItems = [{ label: 'Instagram', link: '#' }, { label: 'LinkedIn', link: '#' }, { label: 'Pinterest', link: '#' }];
+
 export function Navbar() {
   return (
     <>
