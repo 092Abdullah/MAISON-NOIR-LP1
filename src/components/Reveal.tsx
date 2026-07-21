@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-
 interface RevealProps { children: React.ReactNode; delay?: number; className?: string; }
 export const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,7 +12,6 @@ export const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className }
     </div>
   );
 };
-
 interface StaggerProps { children: React.ReactNode; className?: string; staggerDelay?: number; }
 export const Stagger: React.FC<StaggerProps> = ({ children, className, staggerDelay = 0.1 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -24,7 +22,6 @@ export const Stagger: React.FC<StaggerProps> = ({ children, className, staggerDe
     </motion.div>
   );
 };
-
 export const StaggerItem: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
   <motion.div className={className} variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } } }}>
     {children}

@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Logo } from '@/components/Logo';
-
 interface MenuItem { label: string; link: string; }
-
 const MobileMenu: React.FC<{ items: MenuItem[]; socialItems?: { label: string; link: string }[] }> = ({ items, socialItems = [] }) => {
   const [open, setOpen] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -11,24 +9,18 @@ const MobileMenu: React.FC<{ items: MenuItem[]; socialItems?: { label: string; l
   const itemsRef = useRef<(HTMLLIElement | null)[]>([]);
   const socialsRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
-
   const buildTl = useCallback(() => {
     const panels = panelsRef.current.filter(Boolean) as HTMLDivElement[];
     const listItems = itemsRef.current.filter(Boolean) as HTMLLIElement[];
     tl.current = gsap.timeline({ paused: true });
-    tl.current.set(overlayRef.current, { display: 'flex' })
-      .fromTo(panels, { xPercent: 105 }, { xPercent: 0, duration: 0.55, ease: 'power3.inOut', stagger: 0.06 })
-      .fromTo(listItems, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.07 }, '-=0.2');
+    tl.current.set(overlayRef.current, { display: 'flex' }).fromTo(panels, { xPercent: 105 }, { xPercent: 0, duration: 0.55, ease: 'power3.inOut', stagger: 0.06 }).fromTo(listItems, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.07 }, '-=0.2');
     if (socialsRef.current) tl.current.fromTo(socialsRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, '-=0.25');
   }, []);
-
   useEffect(() => { buildTl(); return () => { tl.current?.kill(); }; }, [buildTl]);
-
   const toggle = () => {
     if (!open) { setOpen(true); tl.current?.play(); }
     else { tl.current?.reverse().then(() => { setOpen(false); gsap.set(overlayRef.current, { display: 'none' }); }); }
   };
-
   return (
     <>
       <div className="fixed left-0 right-0 top-0 z-[90] flex items-center justify-between px-5 py-4">
@@ -60,5 +52,4 @@ const MobileMenu: React.FC<{ items: MenuItem[]; socialItems?: { label: string; l
     </>
   );
 };
-
 export default MobileMenu;

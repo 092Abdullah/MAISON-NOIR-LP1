@@ -4,10 +4,8 @@ import { projects } from '@/lib/data';
 import { Reveal } from '@/components/Reveal';
 import { SectionHeading } from '@/components/SectionHeading';
 import { cn } from '@/lib/utils';
-
 const filters = ['All', 'Residential', 'Commercial', 'Hospitality'] as const;
 type Filter = typeof filters[number];
-
 export function Work() {
   const [filter, setFilter] = useState<Filter>('All');
   const filtered = useMemo(() => filter === 'All' ? projects : projects.filter((p) => p.category === filter), [filter]);
@@ -20,9 +18,7 @@ export function Work() {
             <SectionHeading text="The Full Archive" className="text-4xl sm:text-5xl lg:text-6xl text-[#e2e2e2]" />
           </Reveal>
           <div className="flex flex-wrap gap-2">
-            {filters.map((f) => (
-              <button key={f} onClick={() => setFilter(f)} className={cn('rounded-full border px-4 py-2 text-sm transition-all', filter === f ? 'border-[#a8a8a8] bg-white/5 text-[#e2e2e2]' : 'border-[#2a2a2a] text-[#444] hover:border-[#444] hover:text-[#e2e2e2]')}>{f}</button>
-            ))}
+            {filters.map((f) => <button key={f} onClick={() => setFilter(f)} className={cn('rounded-full border px-4 py-2 text-sm transition-all', filter === f ? 'border-[#a8a8a8] bg-white/5 text-[#e2e2e2]' : 'border-[#2a2a2a] text-[#444] hover:border-[#444] hover:text-[#e2e2e2]')}>{f}</button>)}
           </div>
         </div>
         <AnimatePresence mode="wait">

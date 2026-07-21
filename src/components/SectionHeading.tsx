@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import ScrollReveal from 'scrollreveal';
-
 interface Props { text: string; as?: 'h1' | 'h2' | 'h3'; className?: string; }
-
 export function SectionHeading({ text, as: Tag = 'h2', className = '' }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {

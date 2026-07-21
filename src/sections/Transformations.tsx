@@ -6,7 +6,6 @@ import { Reveal } from '@/components/Reveal';
 import { SectionHeading } from '@/components/SectionHeading';
 import { beforeAfterPairs } from '@/lib/data';
 import { cn } from '@/lib/utils';
-
 export function Transformations() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
@@ -34,15 +33,8 @@ export function Transformations() {
           </motion.div>
         </AnimatePresence>
         <div className="mt-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          <div>
-            <p className="font-display text-xl text-[#e2e2e2]">{current.title}</p>
-            <p className="mt-1 text-sm text-[#444]">{current.location}</p>
-          </div>
-          <div className="flex items-center gap-2">
-            {beforeAfterPairs.map((_, i) => (
-              <button key={i} onClick={() => go(i)} aria-label={`Slide ${i + 1}`} className={cn('h-1.5 rounded-full transition-all duration-300', i === index ? 'w-6 bg-[#a8a8a8]' : 'w-1.5 bg-[#2a2a2a] hover:bg-[#444]')} />
-            ))}
-          </div>
+          <div><p className="font-display text-xl text-[#e2e2e2]">{current.title}</p><p className="mt-1 text-sm text-[#444]">{current.location}</p></div>
+          <div className="flex items-center gap-2">{beforeAfterPairs.map((_, i) => <button key={i} onClick={() => go(i)} aria-label={`Slide ${i + 1}`} className={cn('h-1.5 rounded-full transition-all duration-300', i === index ? 'w-6 bg-[#a8a8a8]' : 'w-1.5 bg-[#2a2a2a] hover:bg-[#444]')} />)}</div>
         </div>
         <p className="mt-4 text-label text-[#333]">Drag the handle to reveal</p>
       </div>

@@ -1,9 +1,7 @@
 import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
 import GlassSurface from '@/components/GlassSurface';
 import { stats } from '@/lib/data';
-
 const press = ['Architectural Digest', 'Dezeen', 'Wallpaper*', 'Elle Decor', 'Dwell', 'Architectural Digest', 'Dezeen', 'Wallpaper*', 'Elle Decor', 'Dwell'];
-
 export function Stats() {
   return (
     <section className="border-b border-[#1e1e1e] bg-[#0a0a0a] py-20 sm:py-28">

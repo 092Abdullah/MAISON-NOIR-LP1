@@ -3,14 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Reveal } from '@/components/Reveal';
 import { SectionHeading } from '@/components/SectionHeading';
 import { cn } from '@/lib/utils';
-
 const faqs = [
   { q: 'How long does a typical project take?', a: 'Most residential projects take between four and twelve months from concept sign-off to final installation, depending on scope and custom procurement lead times.' },
   { q: 'Do you work internationally?', a: 'Yes — roughly a third of our projects are outside the United States. We have established supplier relationships and partners in Western Europe, the UK, and select locations in the Middle East.' },
   { q: 'What is your typical fee structure?', a: 'We work on a combination of a flat design fee and a trade discount on procurement. The structure is tailored to each project and agreed upon during the initial consultation.' },
   { q: 'Can you work with an existing renovation contractor?', a: 'Absolutely. We collaborate closely with many contractors and are comfortable stepping into an existing build team.' },
 ];
-
 export function Contact() {
   const [open, setOpen] = useState<number | null>(null);
   const [form, setForm] = useState({ name: '', email: '', message: '' });

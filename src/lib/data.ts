@@ -43,34 +43,9 @@ export const testimonials = [
   { id: '3', quote: 'The process was meticulous and the team endlessly patient. We now live in the most beautiful home we could have dreamed of.', author: 'Sarah Kim', project: 'Noir Penthouse' },
 ];
 
-// LEFT of handle = before (original room). RIGHT of handle = after (redesigned render).
 export const beforeAfterPairs = [
-  {
-    id: '1',
-    title: 'Living Room Transformation',
-    location: 'Project 01',
-    before: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1757347193/roomaigine_gallery/t2fviip5sy2sqlzwrsde.webp',
-    after: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1757347192/roomaigine_gallery/iu2ocnqg3mvgenvl6iwy.png',
-  },
-  {
-    id: '2',
-    title: 'Bedroom Redesign',
-    location: 'Project 02',
-    before: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1758375498/roomaigine_gallery/xx8r7fpofdp5kl9q21dy.webp',
-    after: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1758375498/roomaigine_gallery/vjbbz9thqdggqrxsezn7.png',
-  },
-  {
-    id: '3',
-    title: 'Open Plan Kitchen',
-    location: 'Project 03',
-    before: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1755726909/room-ai-gine/zjphwnhvapp1o29s7tql.jpg',
-    after: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1755726909/room-ai-gine/g2dpypcervrckkvssiiu.png',
-  },
-  {
-    id: '4',
-    title: 'Master Suite',
-    location: 'Project 04',
-    before: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1755975999/room-ai-gine/emivaurwhidkkxhmhmva.jpg',
-    after: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1755975999/room-ai-gine/v7eyde5psyojgs9gdroe.png',
-  },
+  { id: '1', title: 'Living Room Transformation', location: 'Project 01', before: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1757347193/roomaigine_gallery/t2fviip5sy2sqlzwrsde.webp', after: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1757347192/roomaigine_gallery/iu2ocnqg3mvgenvl6iwy.png' },
+  { id: '2', title: 'Bedroom Redesign', location: 'Project 02', before: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1758375498/roomaigine_gallery/xx8r7fpofdp5kl9q21dy.webp', after: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1758375498/roomaigine_gallery/vjbbz9thqdggqrxsezn7.png' },
+  { id: '3', title: 'Open Plan Kitchen', location: 'Project 03', before: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1755726909/room-ai-gine/zjphwnhvapp1o29s7tql.jpg', after: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1755726909/room-ai-gine/g2dpypcervrckkvssiiu.png' },
+  { id: '4', title: 'Master Suite', location: 'Project 04', before: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1755975999/room-ai-gine/emivaurwhidkkxhmhmva.jpg', after: 'https://res.cloudinary.com/drfme1lwi/image/upload/v1755975999/room-ai-gine/v7eyde5psyojgs9gdroe.png' },
 ];

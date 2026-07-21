@@ -6,7 +6,7 @@
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   body { background: #0a0a0a; color: #e2e2e2; font-family: 'Plus Jakarta Sans', sans-serif; }
-  ::selection { background: rgba(200, 200, 200, 0.2); }
+  ::selection { background: rgba(200,200,200,0.2); }
 }
 
 ::-webkit-scrollbar { width: 4px; }

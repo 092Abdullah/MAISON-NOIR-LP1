@@ -1,123 +1,179 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 
-// Same URL as the <link rel="preload"> in index.html — must match exactly for the preload hint to be used
-const HERO_SRC = 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1600';
+const HERO_MAIN = 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1400';
+const HERO_THUMB = 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600';
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 28 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.9, ease, delay },
+});
 
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
-  // Parallax only applied to the image after it has already painted — no effect on LCP timing
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-
   return (
-    <section ref={sectionRef} id="top" className="relative flex h-[100svh] min-h-[700px] w-full flex-col overflow-hidden">
-
-      {/*
-        LCP element: real <img> with fetchpriority="high" + loading="eager" + decoding="sync".
-        The preload hint in index.html ensures the browser starts fetching this before JS even runs.
-        motion.div wraps it for parallax but the image itself is not a background-image,
-        so the browser can discover and prioritise it immediately.
-      */}
-      <motion.div
-        aria-hidden
-        style={{ y: bgY }}
-        className="absolute inset-0 overflow-hidden"
-      >
-        <img
-          src={HERO_SRC}
-          alt=""
-          fetchPriority="high"
-          loading="eager"
-          decoding="sync"
-          className="h-[115%] w-full object-cover object-[center_35%]"
-          style={{ willChange: 'transform' }}
-        />
-      </motion.div>
-
-      {/* Gradient overlay */}
+    <section
+      id="top"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-[#0a0a0a]"
+    >
+      {/* ── Subtle grain texture overlay ──────────────────────────── */}
       <div
         aria-hidden
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.08) 45%, rgba(0,0,0,0.80) 100%)' }}
+        className="pointer-events-none absolute inset-0 z-10 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+          backgroundRepeat: 'repeat',
+          backgroundSize: '128px 128px',
+        }}
       />
 
-      {/* Top metadata row — desktop only */}
-      <div className="pointer-events-none absolute left-0 right-0 top-[5.5rem] hidden items-center justify-between px-14 md:flex">
-        <span className="text-label text-[#555]">Est. 2013</span>
-        <span className="text-label text-[#555]">New York · Paris</span>
-      </div>
+      <div className="relative z-20 mx-auto grid min-h-[100svh] max-w-[1440px] grid-cols-1 items-center gap-0 px-5 sm:px-8 lg:grid-cols-2 lg:gap-0 lg:px-14">
 
-      {/* Main content */}
-      <motion.div style={{ y: contentY }} className="relative mt-auto px-5 pb-20 sm:px-8 sm:pb-28 lg:px-14">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          className="mb-6 flex items-center gap-3"
-        >
-          <span className="h-px w-8 bg-white/50" />
-          <span className="text-label text-[#a8a8a8]">Interior Design Studio</span>
-        </motion.div>
+        {/* ── LEFT — editorial content ────────────────────────────── */}
+        <div className="flex flex-col justify-center pb-12 pt-28 lg:pb-20 lg:pt-0 lg:pr-16">
 
-        <h1 className="mb-8 max-w-4xl font-display leading-[0.93] tracking-tight">
-          <motion.span
-            initial={{ opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            className="block text-[clamp(3rem,7.5vw,6.5rem)] text-white"
-          >
-            Spaces with a
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.44 }}
-            className="block text-[clamp(3rem,7.5vw,6.5rem)] italic text-white/80"
-          >
-            quiet sense of home.
-          </motion.span>
-        </h1>
+          {/* eyebrow */}
+          <motion.div {...fadeUp(0.1)} className="mb-8 flex items-center gap-3">
+            <span className="h-px w-10 bg-[#444]" />
+            <span className="text-label text-[#555]">Interior Design Studio — Est. 2013</span>
+          </motion.div>
 
-        <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
-            className="max-w-sm text-[0.9375rem] leading-relaxed text-white/60"
-          >
-            Full-service studio crafting refined, livable interiors — defined by materiality, light, and the detail you feel before you notice.
+          {/* headline */}
+          <div className="mb-8 overflow-hidden">
+            <motion.h1
+              className="font-display leading-[0.92] tracking-tight text-[#e2e2e2]"
+              style={{ fontSize: 'clamp(3.2rem, 6.5vw, 6rem)' }}
+            >
+              <motion.span {...fadeUp(0.18)} className="block">Spaces</motion.span>
+              <motion.span {...fadeUp(0.27)} className="block italic text-[#888]">crafted to</motion.span>
+              <motion.span {...fadeUp(0.36)} className="block">endure.</motion.span>
+            </motion.h1>
+          </div>
+
+          {/* body */}
+          <motion.p {...fadeUp(0.5)} className="mb-10 max-w-md text-[0.9375rem] leading-[1.7] text-[#555]">
+            A full-service studio working at the intersection of architecture and life — creating homes that feel effortlessly composed from the very first visit.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.72 }}
-            className="flex shrink-0 flex-wrap items-center gap-3"
-          >
-            <a href="#work" className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-all hover:bg-white/90">
-              View our work <span className="transition-transform group-hover:translate-x-0.5">→</span>
+
+          {/* CTAs */}
+          <motion.div {...fadeUp(0.62)} className="flex flex-wrap items-center gap-3">
+            <a
+              href="#work"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-[#e2e2e2] px-7 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-white"
+            >
+              View our work
+              <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
             </a>
-            <a href="#contact" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-medium text-white/70 transition-all hover:border-white/50 hover:text-white">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2.5 rounded-full border border-[#2a2a2a] px-7 py-3.5 text-sm font-medium text-[#888] transition-all duration-300 hover:border-[#555] hover:text-[#e2e2e2]"
+            >
               Book a consult
             </a>
           </motion.div>
-        </div>
-      </motion.div>
 
-      {/* Scroll indicator */}
+          {/* mini stats row */}
+          <motion.div {...fadeUp(0.74)} className="mt-14 flex items-center gap-8 border-t border-[#1a1a1a] pt-8">
+            {[{ v: '180+', l: 'Projects' }, { v: '12', l: 'Years' }, { v: '24', l: 'Awards' }].map((s) => (
+              <div key={s.l}>
+                <p className="font-display text-2xl text-[#e2e2e2]">{s.v}</p>
+                <p className="mt-0.5 text-label text-[#444]">{s.l}</p>
+              </div>
+            ))}
+            <div className="ml-auto hidden sm:block">
+              <span className="text-label text-[#2a2a2a]">New York · Paris</span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── RIGHT — image composition ────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.1, ease, delay: 0.15 }}
+          className="relative hidden h-[100svh] lg:flex lg:items-center"
+        >
+          {/* Main tall image */}
+          <div className="relative h-[88vh] w-full overflow-hidden rounded-2xl">
+            <img
+              src={HERO_MAIN}
+              alt="Green Haven Villa interior"
+              fetchPriority="high"
+              loading="eager"
+              decoding="sync"
+              className="h-full w-full object-cover object-center"
+            />
+            {/* subtle bottom gradient so cards read on top */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          </div>
+
+          {/* ── Floating card: project name (bottom-left) ──────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 0.9 }}
+            className="absolute bottom-[7%] left-[-5%] z-30 min-w-[200px] rounded-2xl border border-white/10 bg-black/70 p-5 backdrop-blur-md"
+          >
+            <p className="text-label text-[#555]">Currently featured</p>
+            <p className="mt-1.5 font-display text-lg leading-tight text-[#e2e2e2]">Green Haven<br />Villa</p>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span className="text-xs text-[#555]">Malibu, California</span>
+            </div>
+          </motion.div>
+
+          {/* ── Floating card: satisfaction (top-right) ───────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 1.05 }}
+            className="absolute right-[-4%] top-[10%] z-30 rounded-2xl border border-white/10 bg-black/70 px-5 py-4 backdrop-blur-md"
+          >
+            <p className="text-label text-[#555]">Client satisfaction</p>
+            <p className="mt-1.5 font-display text-3xl text-[#e2e2e2]">98<span className="text-xl text-[#555]">%</span></p>
+            {/* tiny spark bar */}
+            <div className="mt-2 flex items-end gap-[3px]">
+              {[55, 70, 62, 80, 75, 90, 88, 98].map((h, i) => (
+                <div
+                  key={i}
+                  className="w-[5px] rounded-sm bg-[#e2e2e2]/20"
+                  style={{ height: h * 0.28 + 'px', background: i === 7 ? '#e2e2e2' : 'rgba(226,226,226,0.18)' }}
+                />
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ── Secondary thumbnail image (mid-right) ──────────────── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease, delay: 1.2 }}
+            className="absolute bottom-[22%] right-[-8%] z-30 h-[180px] w-[140px] overflow-hidden rounded-xl border border-white/10 shadow-2xl"
+          >
+            <img src={HERO_THUMB} alt="Noir Penthouse" loading="lazy" className="h-full w-full object-cover" />
+            <div className="absolute inset-x-0 bottom-0 bg-black/60 p-2.5 backdrop-blur-sm">
+              <p className="truncate text-[10px] font-medium leading-tight text-white/90">Noir Penthouse</p>
+              <p className="text-[9px] text-white/40">New York, NY</p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* ── Scroll cue ───────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 1 }}
-        className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
+        transition={{ delay: 2, duration: 0.8 }}
+        className="absolute bottom-6 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex"
       >
         <motion.div
-          animate={{ scaleY: [1, 0.35, 1] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-          className="h-10 w-px origin-top bg-gradient-to-b from-white/50 to-transparent"
+          animate={{ scaleY: [1, 0.3, 1] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+          className="h-9 w-px origin-top bg-gradient-to-b from-white/30 to-transparent"
         />
-        <span className="text-label text-[#444]">Scroll</span>
+        <span className="text-label text-[#333]">Scroll</span>
       </motion.div>
     </section>
   );

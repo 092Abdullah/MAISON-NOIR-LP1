@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-
 interface Props { before: string; after: string; initialPosition?: number; }
-
 export function BeforeAfter({ before, after, initialPosition = 50 }: Props) {
   const [pos, setPos] = useState(initialPosition);
   const [dragging, setDragging] = useState(false);
@@ -27,12 +25,7 @@ export function BeforeAfter({ before, after, initialPosition = 50 }: Props) {
     window.addEventListener('mouseup', onUp);
     window.addEventListener('touchmove', onMove, { passive: true });
     window.addEventListener('touchend', onUp);
-    return () => {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onUp);
-      window.removeEventListener('touchmove', onMove);
-      window.removeEventListener('touchend', onUp);
-    };
+    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); window.removeEventListener('touchmove', onMove); window.removeEventListener('touchend', onUp); };
   }, [dragging]);
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden rounded-2xl select-none" style={{ aspectRatio: '16/9', cursor: dragging ? 'grabbing' : 'col-resize' }}>

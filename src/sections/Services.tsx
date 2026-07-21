@@ -15,10 +15,7 @@ export function Services() {
             <StaggerItem key={s.id}>
               <div className="group flex cursor-default items-start gap-6 bg-[#0a0a0a] p-8 transition-colors hover:bg-[#111] sm:p-10">
                 <span className="mt-0.5 shrink-0 font-mono text-base text-[#a8a8a8]">{s.number}</span>
-                <div className="min-w-0 flex-1">
-                  <h3 className="mb-3 font-display text-2xl text-[#e2e2e2] sm:text-3xl">{s.title}</h3>
-                  <p className="max-w-xl leading-relaxed text-[#444]">{s.description}</p>
-                </div>
+                <div className="min-w-0 flex-1"><h3 className="mb-3 font-display text-2xl text-[#e2e2e2] sm:text-3xl">{s.title}</h3><p className="max-w-xl leading-relaxed text-[#444]">{s.description}</p></div>
                 <ArrowRight className="mt-1 hidden h-4 w-4 shrink-0 text-[#a8a8a8] opacity-0 transition-opacity group-hover:opacity-100 sm:block" />
               </div>
             </StaggerItem>

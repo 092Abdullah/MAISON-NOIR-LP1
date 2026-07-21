@@ -12,11 +12,7 @@ export function Process() {
         <Stagger className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4" staggerDelay={0.1}>
           {processSteps.map((s) => (
             <StaggerItem key={s.number}>
-              <div className="group">
-                <p className="mb-4 font-mono text-2xl text-[#2a2a2a] transition-colors group-hover:text-[#a8a8a8]">{s.number}</p>
-                <h3 className="mb-3 font-display text-xl text-[#e2e2e2]">{s.title}</h3>
-                <p className="text-sm leading-relaxed text-[#444]">{s.description}</p>
-              </div>
+              <div className="group"><p className="mb-4 font-mono text-2xl text-[#2a2a2a] transition-colors group-hover:text-[#a8a8a8]">{s.number}</p><h3 className="mb-3 font-display text-xl text-[#e2e2e2]">{s.title}</h3><p className="text-sm leading-relaxed text-[#444]">{s.description}</p></div>
             </StaggerItem>
           ))}
         </Stagger>
