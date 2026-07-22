@@ -50,31 +50,49 @@ export function Hero() {
             <div className="ml-auto hidden sm:block"><span className="text-label text-[#2a2a2a]">New York · Paris</span></div>
           </motion.div>
         </div>
-        {/* Right */}
+
+        {/* Right — photography only, no dashboard widgets */}
         <motion.div
           initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.1, ease, delay: 0.15 }}
           className="relative hidden h-[100svh] lg:flex lg:items-center"
         >
           <div className="relative h-[88vh] w-full overflow-hidden rounded-2xl">
-            <img src={HERO_MAIN} alt="Green Haven Villa" fetchPriority="high" loading="eager" decoding="sync" className="h-full w-full object-cover" />
+            <img
+              src={HERO_MAIN}
+              alt="Green Haven Villa — Malibu, California"
+              fetchPriority="high"
+              loading="eager"
+              decoding="sync"
+              className="h-full w-full object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            {/* Project label over the image */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.9 }}
+              className="absolute bottom-6 left-6 right-6 flex items-end justify-between"
+            >
+              <div>
+                <p className="text-label text-white/40">Currently featured</p>
+                <p className="mt-1 font-display text-2xl leading-tight text-white">Green Haven Villa</p>
+                <p className="mt-1 text-sm text-white/50">Malibu, California</p>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="text-xs text-white/40">2023</span>
+              </div>
+            </motion.div>
           </div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease, delay: 0.9 }} className="absolute bottom-[7%] left-[-5%] z-30 min-w-[200px] rounded-2xl border border-white/10 bg-black/70 p-5 backdrop-blur-md">
-            <p className="text-label text-[#555]">Currently featured</p>
-            <p className="mt-1.5 font-display text-lg leading-tight text-[#e2e2e2]">Green Haven<br />Villa</p>
-            <div className="mt-3 flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /><span className="text-xs text-[#555]">Malibu, California</span></div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease, delay: 1.05 }} className="absolute right-[-4%] top-[10%] z-30 rounded-2xl border border-white/10 bg-black/70 px-5 py-4 backdrop-blur-md">
-            <p className="text-label text-[#555]">Client satisfaction</p>
-            <p className="mt-1.5 font-display text-3xl text-[#e2e2e2]">98<span className="text-xl text-[#555]">%</span></p>
-            <div className="mt-2 flex items-end gap-[3px]">
-              {[55, 70, 62, 80, 75, 90, 88, 98].map((h, i) => (
-                <div key={i} className="w-[5px] rounded-sm" style={{ height: h * 0.28 + 'px', background: i === 7 ? '#e2e2e2' : 'rgba(226,226,226,0.18)' }} />
-              ))}
-            </div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, ease, delay: 1.2 }} className="absolute bottom-[22%] right-[-8%] z-30 h-[180px] w-[140px] overflow-hidden rounded-xl border border-white/10 shadow-2xl">
+
+          {/* Secondary project thumbnail */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease, delay: 1.1 }}
+            className="absolute bottom-[22%] right-[-8%] z-30 h-[160px] w-[130px] overflow-hidden rounded-xl border border-white/10 shadow-2xl"
+          >
             <img src={HERO_THUMB} alt="Noir Penthouse" loading="lazy" className="h-full w-full object-cover" />
             <div className="absolute inset-x-0 bottom-0 bg-black/60 p-2.5 backdrop-blur-sm">
               <p className="truncate text-[10px] font-medium leading-tight text-white/90">Noir Penthouse</p>
@@ -83,8 +101,17 @@ export function Hero() {
           </motion.div>
         </motion.div>
       </div>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 0.8 }} className="absolute bottom-6 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex">
-        <motion.div animate={{ scaleY: [1, 0.3, 1] }} transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }} className="h-9 w-px origin-top bg-gradient-to-b from-white/30 to-transparent" />
+
+      <motion.div
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 0.8 }}
+        className="absolute bottom-6 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex"
+      >
+        <motion.div
+          animate={{ scaleY: [1, 0.3, 1] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+          className="h-9 w-px origin-top bg-gradient-to-b from-white/30 to-transparent"
+        />
         <span className="text-label text-[#333]">Scroll</span>
       </motion.div>
     </section>
