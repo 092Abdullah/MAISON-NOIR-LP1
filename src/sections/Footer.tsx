@@ -121,7 +121,7 @@ export function Footer() {
           className="relative select-none px-2 py-8 sm:px-4 lg:px-6"
         >
           <p
-            className="font-display leading-[0.82] tracking-tighter text-[#1e1e1e] mix-blend-overlay whitespace-nowrap"
+            className="font-display leading-[0.82] tracking-tighter text-white whitespace-nowrap"
             style={{ fontSize: 'clamp(5rem, 18vw, 22rem)' }}
           >
             Maison Noir
