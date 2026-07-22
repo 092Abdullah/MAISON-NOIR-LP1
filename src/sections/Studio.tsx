@@ -23,19 +23,13 @@ export function Studio() {
             </a>
           </Reveal>
           <Reveal delay={0.15}>
-            {/* Atelier interior — consistent with the studio's own aesthetic */}
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                alt="Maison Noir studio workspace"
+                src="/images/studio_img.png"
+                alt="Maison Noir design studio"
                 className="h-[400px] w-full object-cover sm:h-[500px]"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">Our studio</p>
-                <p className="mt-1 font-display text-xl text-white/80">West Village, New York</p>
-              </div>
             </div>
           </Reveal>
         </div>

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "cp components/sections/studio_img.png public/images/studio_img.png 2>/dev/null || true",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

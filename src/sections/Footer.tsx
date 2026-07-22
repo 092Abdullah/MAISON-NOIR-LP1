@@ -104,16 +104,24 @@ export function Footer() {
 
       <div className="border-t border-[#141414]" />
 
-      {/* Giant wordmark */}
-      <div ref={wordmarkRef} className="overflow-hidden">
+      {/* Giant wordmark with footer.png as background */}
+      <div ref={wordmarkRef} className="relative overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/footer.png)' }}
+          aria-hidden
+        />
+        {/* Dark overlay so the image doesn't overpower the text */}
+        <div className="absolute inset-0 bg-[#0a0a0a]/70" aria-hidden />
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={wordmarkInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.1, ease }}
-          className="select-none px-2 py-6 sm:px-4 lg:px-6"
+          className="relative select-none px-2 py-8 sm:px-4 lg:px-6"
         >
           <p
-            className="font-display leading-[0.82] tracking-tighter text-[#161616] whitespace-nowrap"
+            className="font-display leading-[0.82] tracking-tighter text-[#1e1e1e] mix-blend-overlay whitespace-nowrap"
             style={{ fontSize: 'clamp(5rem, 18vw, 22rem)' }}
           >
             Maison Noir
